@@ -1,0 +1,7 @@
+.button {
+  float: right;
+  background-color: blue;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: white;
+}
