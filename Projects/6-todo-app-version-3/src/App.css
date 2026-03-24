@@ -1,0 +1,21 @@
+input {
+  width: 100%;
+}
+
+.kg-button {
+  min-width: 80px;
+}
+
+.items-container {
+  text-align: left;
+}
+
+.kg-row {
+  margin: 7px 3px;
+}
+
+.todo-container {
+  margin: 10px;
+  background-color: rgba(121, 226, 144, 0.762);
+  border-radius: 10px;
+}

@@ -1,38 +1,29 @@
+import { useState } from "react";
 import "./App.css";
-import HealthyFoodContainer from "./components/HealthyFoodContainer";
+import AddFoodItem from "./components/AddFoodItem";
+import Container from "./components/Container";
+import FoodItems from "./components/FoodItems";
 
 function App() {
-  const healthyFoods = [
-    "Apples",
-    "Bananas",
-    "Broccoli",
-    "Spinach",
-    "Carrots",
-    "Sweet Potatoes",
-    "Oats",
-    "Brown Rice",
-    "Eggs",
-    "Salmon",
-    "Chicken Breast",
-    "Almonds",
-    "Walnuts",
-    "Yogurt",
-    "Avocado",
-  ];
+  const [foodItems, setFoodItems] = useState(["Apples", "Bananas", "Broccoli"]);
 
-  const handleOnchange = (e) => {
-    console.log(e.target.value);
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      let newFoodItem = e.target.value;
+      let newArray = [...foodItems, newFoodItem];
+      setFoodItems(newArray);
+    }
   };
 
-
-
   return (
-    <div>
-      <HealthyFoodContainer
-        healthyFoods={healthyFoods}
-        handleOnchange={handleOnchange}
-      />
-    </div>
+    <>
+      <Container>
+        <h1 className="text-center">Healthy Foods </h1>
+        <AddFoodItem handleKeyDown={onKeyDown} />
+        {/* <p>{textToShow}</p> */}
+        <FoodItems healthyFoods={foodItems} />
+      </Container>
+    </>
   );
 }
 

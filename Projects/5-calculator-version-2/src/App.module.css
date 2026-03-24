@@ -1,0 +1,17 @@
+.calculatorHeader {
+  font-weight: 500;
+  font-size: 25px;
+  text-align: center;
+}
+.calculator {
+  width: 200px;
+  border: 2px solid rgb(119, 119, 119);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
