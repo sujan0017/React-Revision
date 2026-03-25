@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-function TodoItems({ todoItems }) {
+function TodoItems({ todoItems, onDeleteClick }) {
   return (
     <div className="items-container">
       {todoItems.map((item) => (
@@ -9,6 +9,7 @@ function TodoItems({ todoItems }) {
           key={item.name}
           todoName={item.name}
           todoDate={item.dueDate}
+          onDeleteClick={onDeleteClick}
         />
       ))}
     </div>
