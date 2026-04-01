@@ -1,0 +1,45 @@
+.appContainer {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+}
+
+.sideBar {
+  min-height: 800px;
+}
+
+.post-card {
+  margin: 20px 30px;
+}
+
+.hashtag {
+  margin: 0 3px;
+}
+
+.deleteContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteButton {
+  font-size: 25px;
+  color: red;
+  cursor: pointer;
+}
+
+.reaction {
+  margin: 15px 0 0 0;
+}
+
+.createPost {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.welcome-message {
+  margin: 100px 0;
+}
