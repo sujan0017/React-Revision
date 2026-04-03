@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { TiDelete } from "react-icons/ti";
 import { PostList } from "../store/post-list-store";
+import Reactions from "./Reactions";
 
 function Post({ post }) {
   const { deletePost } = useContext(PostList);
@@ -20,11 +21,13 @@ function Post({ post }) {
         <p className="card-text">{post.body}</p>
         {post.tags.map((tag) => (
           <span key={tag} className="badge text-bg-primary hashtag">
-            {tag}
+            #{tag}
           </span>
         ))}
+
         <div className={` alert alert-success reaction`} role="alert">
-          This post has been reacted by {post.reactions} people
+          This post has been reacted by {post.reactions.likes} people and
+          disliked by {post.reactions.dislikes}
         </div>
       </div>
     </div>

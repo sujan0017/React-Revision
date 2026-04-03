@@ -1,13 +1,17 @@
 import React, { useContext, useRef } from "react";
 import { PostList } from "../store/post-list-store";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const { addPost } = useContext(PostList);
+  const navigate = useNavigate();
 
   const userIdElement = useRef("");
   const postTitleElement = useRef("");
   const postBodyElement = useRef("");
-  const reactionsElement = useRef("");
+  // const reactionsElement = useRef("");
+  const reactionsLikesElement = useRef("");
+  const reactionsDislikesElement = useRef("");
   const tagsElement = useRef("");
 
   const handleSubmit = (event) => {
@@ -15,16 +19,38 @@ function CreatePost() {
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
     const postBody = postBodyElement.current.value;
-    const reactions = reactionsElement.current.value;
+    const reactionsLikes = reactionsLikesElement.current.value;
+    const reactionsDislikes = reactionsDislikesElement.current.value;
     const tags = tagsElement.current.value.split(" ");
-
-    addPost(userId, postTitle, postBody, reactions, tags);
 
     userIdElement.current.value = "";
     postTitleElement.current.value = "";
     postBodyElement.current.value = "";
-    reactionsElement.current.value = "";
+    reactionsLikesElement.current.value = "";
+    reactionsDislikesElement.current.value = "";
     tagsElement.current.value = "";
+
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userId,
+        title: postTitle,
+        body: postBody,
+        reactions: {
+          likes: reactionsLikes,
+          dislikes: reactionsDislikes,
+        },
+        tags: tags,
+      }),
+    })
+      .then((res) => res.json())
+      .then((post) => {
+        addPost(post);
+        navigate("/");
+      });
+
+    
   };
 
   return (
@@ -65,18 +91,33 @@ function CreatePost() {
           placeholder="Tell us more about it"
         />
       </div>
+
       <div className="mb-3">
         <label htmlFor="reactions" className="form-label">
-          No of reactions
+          No of Likes
         </label>
         <input
-          ref={reactionsElement}
+          ref={reactionsLikesElement}
           type="number"
           className="form-control"
           id="reactions"
           placeholder="How many people reacted to your post"
         />
       </div>
+
+      <div className="mb-3">
+        <label htmlFor="reactions" className="form-label">
+          No of Dislikes
+        </label>
+        <input
+          ref={reactionsDislikesElement}
+          type="number"
+          className="form-control"
+          id="reactions"
+          placeholder="How many people reacted to your post"
+        />
+      </div>
+
       <div className="mb-3">
         <label htmlFor="tags" className="form-label">
           Tags
