@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { TiDelete } from "react-icons/ti";
 import { PostList } from "../store/post-list-store";
-import Reactions from "./Reactions";
 
 function Post({ post }) {
   const { deletePost } = useContext(PostList);

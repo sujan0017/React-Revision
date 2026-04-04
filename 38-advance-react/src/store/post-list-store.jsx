@@ -1,10 +1,9 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
   deletePost: () => {},
-  fetching: false,
 });
 
 const postListReducer = (currentPostList, action) => {
@@ -23,7 +22,6 @@ const postListReducer = (currentPostList, action) => {
 
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
-  const [fetching, setFetching] = useState(false);
 
   const addPost = (post) => {
     dispatchPostList({
@@ -32,14 +30,14 @@ const PostListProvider = ({ children }) => {
     });
   };
 
-  const addInitialPosts = (posts) => {
-    dispatchPostList({
-      type: "ADD_INITIAL_POSTS",
-      payload: {
-        posts,
-      },
-    });
-  };
+  // const addInitialPosts = (posts) => {
+  //   dispatchPostList({
+  //     type: "ADD_INITIAL_POSTS",
+  //     payload: {
+  //       posts,
+  //     },
+  //   });
+  // };
 
   const deletePost = (postId) => {
     dispatchPostList({
@@ -50,35 +48,30 @@ const PostListProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    setFetching(true);
+  // useEffect(() => {
+  //   setFetching(true);
 
-    const controller = new AbortController();
-    const signal = controller.signal;
+  //   const controller = new AbortController();
+  //   const signal = controller.signal;
 
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        // const normalized = data.posts.map((post) => ({
-        //   ...post,
-        //   reactions: post.reactions.likes, // or likes + dislikes
-        // }));
-        addInitialPosts(data.posts);
-        setFetching(false);
-      });
+  //   fetch("https://dummyjson.com/posts", { signal })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       addInitialPosts(data.posts);
+  //       setFetching(false);
+  //     });
 
-    return () => {
-      console.log("Cleaning the useEffect");
-      controller.abort();
-    };
-  }, []);
+  //   return () => {
+  //     console.log("Cleaning the useEffect");
+  //     controller.abort();
+  //   };
+  // }, []);
 
   return (
     <PostList.Provider
       value={{
         postList,
         addPost,
-        fetching,
         deletePost,
       }}
     >
